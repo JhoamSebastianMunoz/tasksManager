@@ -1,0 +1,11 @@
+import React from 'react'
+import '../ContainerTasks/ContainerTasks.css'
+
+export const ContainerTasks = ({children}) => {
+    return (
+    <ul className='container-tasks' >
+        {children}
+    </ul>
+    )
+}
+
