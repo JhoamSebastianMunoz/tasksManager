@@ -6,8 +6,6 @@ import { ItemTask } from '../../ItemTask/ItemTask'
 import { taskContext } from '../../Context/Context'
 import { NewTask } from '../../NewTask/NewTask'
 import { FilterTasks } from '../../FilterTasks/FilterTasks'
-import '../Home/Home.css'
-
 export const Home = () => {
   const context = React.useContext(taskContext)
 

@@ -101,9 +101,6 @@ select,
 button {
   font: inherit;
   color: inherit;
-}
-
-button {
   background: none;
   border: none;
   cursor: pointer;
