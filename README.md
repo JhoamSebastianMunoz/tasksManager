@@ -2,41 +2,41 @@
 
 # Tasks Manager
 
-*A lightweight task management app built with React and Vite*
+*Aplicación ligera de gestión de tareas construida con React y Vite*
 
 [![React](https://img.shields.io/badge/React-18-61dafb?style=flat-square&logo=react&logoColor=black)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-5-646cff?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES2020-f7df1e?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![ESLint](https://img.shields.io/badge/Linting-ESLint-4b32c3?style=flat-square&logo=eslint&logoColor=white)](https://eslint.org)
 
-[Features](#features) • [Getting started](#getting-started) • [Usage](#usage) • [Project structure](#project-structure) • [Scripts](#scripts)
-
-</div>
+[Características](#características) • [Comenzando](#comenzando) • [Uso](#uso) • [Estructura del proyecto](#estructura-del-proyecto) • [Scripts](#scripts)
 
 ---
 
-A simple, single-page to-do application to create, track and filter tasks. State is handled globally with the React Context API — no backend or external services required. The interface text is in Spanish (*Gestor de Tareas*), as it was built for a Spanish-language training program.
+---
 
-## Features
+Una aplicación de tareas (to-do) de una sola página para crear, rastrear y filtrar tareas. El estado se gestiona globalmente con la API de Contexto de React — sin backend ni servicios externos. La interfaz está en español (*Gestor de Tareas*), ya que fue construida para un programa de capacitación en español.
 
-- **Create tasks** — add tasks with a title and a short description (up to 100 characters) from a simple form.
-- **Mark as done** — toggle a task's completion state with a checkbox; completed tasks get a visual highlight and status indicator.
-- **Filter by status** — show *all*, *pending* or *completed* tasks with a dropdown filter.
-- **Live counters** — the header always displays how many tasks are pending and how many are finished.
-- **Global state** — a single `TasksProvider` context shares tasks, filters and counters across the whole app.
-- **Zero config** — batteries-included dev server with Hot Module Replacement (HMR) and a flat ESLint config ready to go.
+## Características
+
+- **Crear tareas** — agregar tareas con un título y una descripción corta (hasta 100 caracteres) desde un formulario simple.
+- **Marcar como hechas** — alternar el estado de completado de una tarea con una casilla de verificación; las tareas completadas reciben un resaltado visual e indicador de estado.
+- **Filtrar por estado** — mostrar *todas*, *pendientes* o *completadas* con un menú desplegable de filtro.
+- **Contadores en vivo** — el encabezado siempre muestra cuántas tareas están pendientes y cuántas están terminadas.
+- **Estado global** — un único `TasksProvider` comparte tareas, filtros y contadores en toda la aplicación.
+- **Sin configuración** — servidor de desarrollo listo para usar con HMR (Hot Module Replacement) y configuración ESLint plana lista para usar.
 
 > [!NOTE]
-> Tasks live in memory only. Reloading the page resets the list — persistence (e.g. `localStorage`) is intentionally left out to keep the sample minimal.
+> Las tareas viven solo en memoria. Recargar la página restablece la lista — la persistencia (por ejemplo, `localStorage`) se omite intencionalmente para mantener el ejemplo minimal.
 
-## Getting started
+## Comenzando
 
-### Prerequisites
+### Prerrequisitos
 
-- [Node.js](https://nodejs.org/) LTS (v18 or later)
-- npm (bundled with Node.js)
+- [Node.js](https://nodejs.org/) LTS (v18 o posterior)
+- npm (incluido con Node.js)
 
-### Installation
+### Instalación
 
 ```bash
 git clone https://github.com/JhoamSebastianMunoz/tasksManager.git
@@ -44,63 +44,65 @@ cd tasksManager
 npm install
 ```
 
-### Run in development
+### Ejecutar en desarrollo
 
 ```bash
 npm run dev
 ```
 
-The app starts at `http://localhost:5173` with hot reload enabled.
+La aplicación inicia en `http://localhost:5173` con recarga en caliente habilitada.
 
 > [!TIP]
-> Run `npm run lint` before committing to check your code against the project's ESLint rules, and `npm run build` to verify a production build.
+> Ejecuta `npm run lint` antes de hacer commit para verificar tu código contra las reglas ESLint del proyecto, y `npm run build` para verificar una compilación de producción.
 
-## Usage
+## Uso
 
-1. Fill in **Título de la tarea** (task title) and **Descripción de la tarea** (description), then click **Crear nueva tarea**.
-2. Use the checkbox on each task to mark it as completed or pending — the counter at the top updates automatically.
-3. Pick an option in **Filtrar por** to display *Todas* (all), *Pendientes* (pending) or *Completados* (done) tasks.
+1. Llena **Título de la tarea** (título de la tarea) y **Descripción de la tarea** (descripción), luego haz clic en **Crear nueva tarea**.
+2. Usa la casilla de verificación de cada tarea para marcarla como completada o pendiente — el contador en la parte superior se actualiza automáticamente.
+3. Elige una opción en **Filtrar por** para mostrar *Todas* (todas), *Pendientes* (pendientes) o *Completadas* (hechas) tareas.
 
-## Project structure
+## Estructura del proyecto
 
 ```
 src/
-├── assets/                  # Images used by the UI
+├── assets/                  # Imágenes usadas por la interfaz
 ├── components/
-│   ├── Context/             # TasksProvider: global state (tasks, filters, counters)
-│   ├── FilterTasks/         # Status filter dropdown
-│   ├── ItemTask/            # Task row with completion toggle
-│   ├── Layouts/             # Header, Main, ContainerTasks, InfoTasks
-│   ├── NewTask/             # Task creation form
-│   └── Pages/Home/          # Home page composing the layout
-├── App.jsx                  # Root component
-└── main.jsx                 # Entry point, wraps <App/> in <TasksProvider>
+│   ├── Context/             # TasksProvider: estado global (tareas, filtros, contadores)
+│   ├── FilterTasks/         # Menú desplegable de filtro de estado
+│   ├── ItemTask/            # Fila de tarea con alternar de completado
+│   ├── Layouts/             # Encabezado, Principal, ContenedorTareas, InfoTareas
+│   ├── NewTask/             # Formulario de creación de tareas
+│   └── Pages/Home/          # Página de inicio que compone el diseño
+├── App.jsx                  # Componente raíz
+└── main.jsx                 # Punto de entrada, envuelve <App/> en <TasksProvider>
 ```
 
-Each component ships alongside its own CSS file, keeping styles scoped by feature.
+Cada componente incluye su propio archivo CSS, manteniendo los estilos con alcance por característica.
 
-### How state flows
+### Cómo fluye el estado
 
-- `TasksProvider` (`src/components/Context/Context.jsx`) holds the `tasks` and `filteredTasks` arrays plus the pending/done counters.
-- `NewTask` appends a new task with a `uuid` and `status: false`.
-- `ItemTask` looks up its task by id and calls `updateTaskStatus` on toggle.
-- `InfoTasks` recomputes the counters whenever the task list changes.
-- `FilterTasks` replaces `filteredTasks` with the subset matching the selected status.
+- `TasksProvider` (`src/components/Context/Context.jsx`) contiene los arreglos `tasks` y `filteredTasks` más los contadores pendientes/hechos.
+- `NewTask` añade una nueva tarea con un `uuid` y `status: false`.
+- `ItemTask` busca su tarea por id y llama a `updateTaskStatus` al alternar.
+- `InfoTasks` recalcula los contadores cada vez que cambia la lista de tareas.
+- `FilterTasks` reemplaza `filteredTasks` con el subconjunto que coincide con el estado seleccionado.
 
 ## Scripts
 
-| Script | Description |
+| Script | Descripción |
 | --- | --- |
-| `npm run dev` | Start the Vite dev server with HMR |
-| `npm run build` | Create an optimized production build in `dist/` |
-| `npm run preview` | Serve the production build locally |
-| `npm run lint` | Run ESLint across the project |
+| `npm run dev` | Inicia el servidor de desarrollo de Vite con HMR |
+| `npm run build` | Crea una compilación de producción optimizada en `dist/` |
+| `npm run preview` | Sirve la compilación de producción localmente |
+| `npm run lint` | Ejecuta ESLint en todo el proyecto |
 
-## Tech stack
+## Pila tecnológica
 
-| Tool | Purpose |
+| Herramienta | Propósito |
 | --- | --- |
-| [React 18](https://react.dev) | UI library, Context API for state |
-| [Vite 5](https://vitejs.dev) | Dev server and production bundler |
-| [uuid](https://github.com/uuidjs/uuid) | Unique ids for tasks |
-| [ESLint 9](https://eslint.org) | Flat-config linting with React & hooks plugins |
+| [React 18](https://react.dev) | Librería de UI, API de Contexto para el estado |
+| [Vite 5](https://vitejs.dev) | Servidor de desarrollo y empaquetador de producción |
+| [uuid](https://github.com/uuidjs/uuid) | Identificadores únicos para tareas |
+| [ESLint 9](https://eslint.org) | Linting con configuración plana y plugins de React y hooks |
+
+</div>
