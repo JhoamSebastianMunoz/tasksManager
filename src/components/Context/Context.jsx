@@ -1,42 +1,61 @@
-import { createContext, useState } from 'react'
+import PropTypes from 'prop-types'
+import { createContext, useState, useMemo, useCallback } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-export const taskContext = createContext()
-const tsk=[
-]
+const taskContext = createContext()
 
-export const TasksProvider = ({children}) =>{
+export { taskContext }
 
-    const[tasks,setTasks] =useState(tsk)
-    const [filteredTasks, setFilteredTasks]= useState(tsk)
-    const [pendingTasks, setPendingTasks] = useState(0)
-    const [doneTasks, setDoneTasks]= useState(0)
+const initialTasks = []
 
-    // función para actualizar el estado de una tarea
-    const updateTaskStatus =(taskId, newStatus) => {
-        setTasks(prevTasks =>
-            prevTasks.map(task =>
-                task.id === taskId ? {...task, status: newStatus}: task
-            )
-        );    
-    }
-    return(
-        <taskContext.Provider value={{
-            tasks,
-            setTasks,
-            pendingTasks,
-            setPendingTasks,
-            doneTasks,
-            setDoneTasks,
-            updateTaskStatus,
-            filteredTasks, 
-            setFilteredTasks
-            }}>
-                {children}
-        </taskContext.Provider>
+export const TasksProvider = ({ children }) => {
+  const [tasks, setTasks] = useState(initialTasks)
+  const [filteredTasks, setFilteredTasks] = useState(initialTasks)
+
+  const pendingTasks = useMemo(
+    () => tasks.filter(task => task.status === false).length,
+    [tasks]
+  )
+
+  const doneTasks = useMemo(
+    () => tasks.filter(task => task.status === true).length,
+    [tasks]
+  )
+
+  const updateTaskStatus = useCallback((taskId, newStatus) => {
+    setTasks(prevTasks =>
+      prevTasks.map(task =>
+        task.id === taskId ? { ...task, status: newStatus } : task
+      )
     )
+  }, [])
 
+  const addTask = useCallback((task) => {
+    const newTask = {
+      id: uuidv4(),
+      ...task,
+      status: false
+    }
+    setTasks(prev => [...prev, newTask])
+    setFilteredTasks(prev => [...prev, newTask])
+  }, [])
+
+  return (
+    <taskContext.Provider value={{
+      tasks,
+      setTasks,
+      pendingTasks,
+      doneTasks,
+      updateTaskStatus,
+      filteredTasks,
+      setFilteredTasks,
+      addTask
+    }}>
+      {children}
+    </taskContext.Provider>
+  )
 }
 
-
-
+TasksProvider.propTypes = {
+  children: PropTypes.node.isRequired
+}

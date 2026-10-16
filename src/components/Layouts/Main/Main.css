@@ -1,9 +1,5 @@
-.main-container {    
-    width: 83vw;
-    height: max-content;
-    margin-top: 20rem;
-    background-color: var(--main-color);
-    display: flex;
-    flex-direction: column;
-    align-items: center;  
+.main-container {
+  width: 100%;
+  max-width: var(--max-width-page);
+  margin: 0 auto;
 }

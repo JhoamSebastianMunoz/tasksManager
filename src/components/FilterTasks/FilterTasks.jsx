@@ -1,33 +1,36 @@
-import {useContext} from 'react'
+import { useContext } from 'react'
 import { taskContext } from '../Context/Context'
 import '../FilterTasks/FilterTasks.css'
 
-
 export const FilterTasks = () => {
-
   const context = useContext(taskContext)
 
-  const handleFilters =(event)=>{
-    let currentOption = event.target.value
-    if(currentOption === 'pendientes'){
-      context.setFilteredTasks(context.tasks.filter(tasks => tasks.status === false))
-    }else if (currentOption === 'realizadas'){
-      context.setFilteredTasks(context.tasks.filter(tasks => tasks.status === true))
-    }else{
+  const handleFilters = (event) => {
+    const currentOption = event.target.value
+    if (currentOption === 'pendientes') {
+      context.setFilteredTasks(context.tasks.filter(task => task.status === false))
+    } else if (currentOption === 'realizadas') {
+      context.setFilteredTasks(context.tasks.filter(task => task.status === true))
+    } else {
       context.setFilteredTasks(context.tasks)
     }
   }
+
   return (
-    <div className='container-filters' >
-      <label >Filtrar por: </label>
-      <select name="" id="" onChange={handleFilters} >
-        <option value="Todas" className='opt opt1' >Todas</option>
-        <option value="pendientes" className='opt opt2' >Pendientes</option>
-        <option value="realizadas" className='opt opt3' >Completados</option>
+    <div className='filter-tasks' role='search' aria-label='Filtrar tareas'>
+      <label htmlFor='filter-select' className='filter-tasks__label'>
+        Filtrar
+      </label>
+      <select
+        id='filter-select'
+        className='filter-tasks__select'
+        onChange={handleFilters}
+        defaultValue='Todas'
+      >
+        <option value='Todas' className='filter-tasks__option'>Todas</option>
+        <option value='pendientes' className='filter-tasks__option'>Pendientes</option>
+        <option value='realizadas' className='filter-tasks__option'>Terminadas</option>
       </select>
-      
     </div>
   )
 }
-
-

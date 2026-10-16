@@ -1,26 +1,85 @@
-    .container-filters {
-        width: 60vw;
-        height: max-content;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 12rem;
-        padding: 1rem;  
-    }
-    
-    .container-filters > label {
-        color: #000;
-        font-size: 1.2rem;
-        margin: 0.2rem;
-        font-weight: 800;
-    }
-    
-    .container-filters > select {
-        width: 18rem;
-        border-radius: 25px;
-        margin-left: 0.5rem;  
-        color: #35c2fa;
-        font-size: 1rem;
-        padding: 0.5rem;
-        cursor: pointer;
-    }
+.filter-tasks {
+  width: 100%;
+  max-width: var(--max-width-task);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--line);
+  margin-top: var(--space-4);
+}
+
+.filter-tasks__label {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: var(--ink);
+  margin-right: var(--space-3);
+  vertical-align: middle;
+}
+
+.filter-tasks__select {
+  display: inline-block;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-task);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--ink);
+  background-color: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F0F0F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-2) center;
+  background-size: 16px;
+  padding-right: var(--space-5);
+  transition: border-color 0.15s ease;
+  min-width: 160px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .filter-tasks__select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F5F5F0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  }
+}
+
+.filter-tasks__select:hover {
+  border-color: var(--muted);
+}
+
+.filter-tasks__select:focus {
+  border-color: var(--ink);
+  box-shadow: var(--focus-ring);
+  outline: none;
+}
+
+.filter-tasks__select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.filter-tasks__option {
+  font-family: var(--font-task);
+  font-size: var(--text-sm);
+  color: var(--ink);
+  background-color: var(--paper);
+}
+
+@media (max-width: 480px) {
+  .filter-tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+  }
+
+  .filter-tasks__label {
+    margin-right: 0;
+  }
+
+  .filter-tasks__select {
+    width: 100%;
+    min-width: auto;
+  }
+}

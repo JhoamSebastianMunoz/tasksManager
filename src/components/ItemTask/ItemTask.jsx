@@ -1,30 +1,43 @@
-import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
+import { useContext } from 'react'
 import { taskContext } from '../Context/Context'
 import '../ItemTask/ItemTask.css'
 
-export const ItemTask = ({idTask, content, titleTask}) => {
-    
-    const {tasks, updateTaskStatus} =useContext(taskContext)
+export const ItemTask = ({ idTask, content, titleTask }) => {
+  const { tasks, updateTaskStatus } = useContext(taskContext)
 
-    const task = tasks.find(task => task.id === idTask)
+  const task = tasks.find(task => task.id === idTask)
 
-    const handleCheckboxChange = () =>{
-        //Actualizamos el estado de la tarea
-        updateTaskStatus(idTask, !task.status);
-    }
+  const handleCheckboxChange = () => {
+    updateTaskStatus(idTask, !task.status)
+  }
 
-    return (
-    <li id={idTask} className={task.status ? "item-task checked" : "item-task"}>
-        <div className={task.status ? "circle-state circle-green" : "circle-state"}></div>
-            <h2>{titleTask}</h2>
-            <p>{content}</p>
-        <input
-        type="checkbox"
-        checked={task.status}
+  const isCompleted = task?.status
+
+  return (
+    <li
+      id={idTask}
+      className={`item-task ${isCompleted ? 'item-task--completed' : ''}`}
+    >
+      <div className='item-task__content'>
+        <h2 className='item-task__title'>{titleTask}</h2>
+        {content && (
+          <p className='item-task__description'>{content}</p>
+        )}
+      </div>
+      <input
+        type='checkbox'
+        className='item-task__checkbox'
+        checked={isCompleted}
         onChange={handleCheckboxChange}
-        />
+        aria-label={isCompleted ? `Marcar "${titleTask}" como pendiente` : `Marcar "${titleTask}" como terminada`}
+      />
     </li>
-    )
+  )
 }
 
-
+ItemTask.propTypes = {
+  idTask: PropTypes.string.isRequired,
+  content: PropTypes.string,
+  titleTask: PropTypes.string.isRequired
+}

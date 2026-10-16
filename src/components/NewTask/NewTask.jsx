@@ -1,48 +1,78 @@
-import React, {useContext, useRef, useState} from 'react'
+import { useContext, useRef, useState } from 'react'
 import { taskContext } from '../Context/Context'
-import { v4 as uuidv4} from 'uuid'
 import '../NewTask/NewTask.css'
 
 export const NewTask = () => {
+  const { addTask } = useContext(taskContext)
 
-    const context = useContext(taskContext)
+  const [titleTask, setTitleTask] = useState('')
+  const [descriptionTask, setDescriptionTask] = useState('')
 
-    const [titleTask, setTitleTask]=useState('')
-    const [descriptionTask,setDescriptionTask]=useState('')
+  const txtTitle = useRef(null)
+  const txtDescription = useRef(null)
 
-    const txtTitle =useRef('')
-    const txtDescription =useRef('')
+  const handleTitleTask = (event) => setTitleTask(event.target.value)
+  const handleDescriptionTask = (event) => setDescriptionTask(event.target.value)
 
-    const handleTitleTask = (event)=> setTitleTask(event.target.value)
-    const handleDescriptionTask = (event) => setDescriptionTask(event.target.value)
-    
-    const handleCreateTask = (event) =>{
-        event.preventDefault()
-        const newTask ={
-            id: uuidv4(),
-            title: titleTask,
-            description: descriptionTask, 
-            status: false 
-        }
-    context.setTasks([...context.tasks,newTask])
-    context.setFilteredTasks([...context.tasks,newTask])
-
-    txtTitle.current.value =''
-    txtDescription.current.value =''
+  const handleCreateTask = (event) => {
+    event.preventDefault()
+    if (!titleTask.trim()) {
+      txtTitle.current?.focus()
+      return
     }
-    return (
-    <form className='frm-task' >
-        <fieldset>
-            <label htmlFor="">Título de la tarea</label>
-            <input ref={txtTitle} onChange={handleTitleTask} id='txt-title' placeholder='Ej:Aseo ambiente' type="text" />
-        </fieldset>
-        <fieldset>
-            <label htmlFor="">Descripción de la tarea</label>
-            <input ref={txtDescription} onChange={handleDescriptionTask} id='txt-description' placeholder='Ej: Realizar aseo del ambiente' type="text" maxLength={100} />
-        </fieldset>
-        <button onClick={handleCreateTask} className='btn-new-task'> Crear nueva tarea </button>
+
+    addTask({
+      title: titleTask.trim(),
+      description: descriptionTask.trim()
+    })
+
+    setTitleTask('')
+    setDescriptionTask('')
+    txtTitle.current?.focus()
+  }
+
+  return (
+    <form className='frm-task' onSubmit={handleCreateTask}>
+      <fieldset className='frm-task__fieldset'>
+        <label htmlFor='txt-title' className='frm-task__label'>
+          Título
+        </label>
+        <input
+          ref={txtTitle}
+          id='txt-title'
+          className='frm-task__input'
+          type='text'
+          placeholder='Ej: Revisar pull request'
+          value={titleTask}
+          onChange={handleTitleTask}
+          maxLength={80}
+          autoComplete='off'
+          required
+        />
+      </fieldset>
+
+      <fieldset className='frm-task__fieldset'>
+        <label htmlFor='txt-description' className='frm-task__label'>
+          Descripción
+        </label>
+        <input
+          ref={txtDescription}
+          id='txt-description'
+          className='frm-task__input'
+          type='text'
+          placeholder='Ej: Revisar cambios en el módulo de autenticación'
+          value={descriptionTask}
+          onChange={handleDescriptionTask}
+          maxLength={200}
+          autoComplete='off'
+        />
+      </fieldset>
+
+      <div className='frm-task__actions'>
+        <button type='submit' className='btn-new-task' disabled={!titleTask.trim()}>
+          Crear tarea
+        </button>
+      </div>
     </form>
-    )
+  )
 }
-
-
