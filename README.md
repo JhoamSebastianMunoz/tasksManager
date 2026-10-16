@@ -1,5 +1,3 @@
-<div align="center">
-
 # Tasks Manager
 
 *Aplicación ligera de gestión de tareas construida con React y Vite*
@@ -9,25 +7,27 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES2020-f7df1e?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![ESLint](https://img.shields.io/badge/Linting-ESLint-4b32c3?style=flat-square&logo=eslint&logoColor=white)](https://eslint.org)
 
-[Características](#características) • [Comenzando](#comenzando) • [Uso](#uso) • [Estructura del proyecto](#estructura-del-proyecto) • [Scripts](#scripts)
+[Características](#características) • [Demo en vivo](#demo-en-vivo) • [Comenzando](#comenzando) • [Uso](#uso) • [Estructura del proyecto](#estructura-del-proyecto) • [Scripts](#scripts) • [Pila tecnológica](#pila-tecnológica)
 
 ---
 
----
-
-Una aplicación de tareas (to-do) de una sola página para crear, rastrear y filtrar tareas. El estado se gestiona globalmente con la API de Contexto de React — sin backend ni servicios externos. La interfaz está en español (*Gestor de Tareas*), ya que fue construida para un programa de capacitación en español.
+Aplicación de tareas (to-do) de una sola página para crear, rastrear y filtrar tareas. El estado se gestiona globalmente con la API de Contexto de React, sin backend ni servicios externos. La interfaz está en español (*Gestor de Tareas*) y fue construida para un programa de capacitación en español.
 
 ## Características
 
-- **Crear tareas** — agregar tareas con un título y una descripción corta (hasta 100 caracteres) desde un formulario simple.
-- **Marcar como hechas** — alternar el estado de completado de una tarea con una casilla de verificación; las tareas completadas reciben un resaltado visual e indicador de estado.
-- **Filtrar por estado** — mostrar *todas*, *pendientes* o *completadas* con un menú desplegable de filtro.
-- **Contadores en vivo** — el encabezado siempre muestra cuántas tareas están pendientes y cuántas están terminadas.
+- **Crear tareas** — agregar tareas con título y descripción corta desde un formulario simple.
+- **Marcar como hechas** — alternar el estado de completado con una casilla de verificación; las tareas completadas reciben un resaltado visual.
+- **Filtrar por estado** — mostrar *todas*, *pendientes* o *terminadas* con un menú desplegable.
+- **Contadores en vivo** — el encabezado muestra siempre cuántas tareas están pendientes y cuántas están terminadas.
 - **Estado global** — un único `TasksProvider` comparte tareas, filtros y contadores en toda la aplicación.
-- **Sin configuración** — servidor de desarrollo listo para usar con HMR (Hot Module Replacement) y configuración ESLint plana lista para usar.
+- **Sin configuración** — servidor de desarrollo con HMR y configuración ESLint plana lista para usar.
 
 > [!NOTE]
 > Las tareas viven solo en memoria. Recargar la página restablece la lista — la persistencia (por ejemplo, `localStorage`) se omite intencionalmente para mantener el ejemplo minimal.
+
+## Demo en vivo
+
+La aplicación está desplegada en: **https://tasks-manager-six.vercel.app**
 
 ## Comenzando
 
@@ -57,9 +57,9 @@ La aplicación inicia en `http://localhost:5173` con recarga en caliente habilit
 
 ## Uso
 
-1. Llena **Título de la tarea** (título de la tarea) y **Descripción de la tarea** (descripción), luego haz clic en **Crear nueva tarea**.
-2. Usa la casilla de verificación de cada tarea para marcarla como completada o pendiente — el contador en la parte superior se actualiza automáticamente.
-3. Elige una opción en **Filtrar por** para mostrar *Todas* (todas), *Pendientes* (pendientes) o *Completadas* (hechas) tareas.
+1. Llena **Título** y **Descripción**, luego haz clic en **Crear tarea**.
+2. Usa la casilla de verificación de cada tarea para marcarla como completada o pendiente; el contador se actualiza automáticamente.
+3. Elige una opción en **Filtrar** para mostrar *Todas*, *Pendientes* o *Terminadas*.
 
 ## Estructura del proyecto
 
@@ -84,7 +84,7 @@ Cada componente incluye su propio archivo CSS, manteniendo los estilos con alcan
 - `TasksProvider` (`src/components/Context/Context.jsx`) contiene los arreglos `tasks` y `filteredTasks` más los contadores pendientes/hechos.
 - `NewTask` añade una nueva tarea con un `uuid` y `status: false`.
 - `ItemTask` busca su tarea por id y llama a `updateTaskStatus` al alternar.
-- `InfoTasks` recalcula los contadores cada vez que cambia la lista de tareas.
+- `Header` recomputa y muestra los contadores cada vez que cambia la lista de tareas.
 - `FilterTasks` reemplaza `filteredTasks` con el subconjunto que coincide con el estado seleccionado.
 
 ## Scripts
@@ -104,5 +104,3 @@ Cada componente incluye su propio archivo CSS, manteniendo los estilos con alcan
 | [Vite 5](https://vitejs.dev) | Servidor de desarrollo y empaquetador de producción |
 | [uuid](https://github.com/uuidjs/uuid) | Identificadores únicos para tareas |
 | [ESLint 9](https://eslint.org) | Linting con configuración plana y plugins de React y hooks |
-
-</div>
